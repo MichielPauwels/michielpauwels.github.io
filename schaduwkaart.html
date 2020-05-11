@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Schaduwkaart</title>
+        <link rel="icon" href="https://statics.shadow.tech/placeholder/shadow-icon-black@3x.png">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
+        <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+        <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
+        <link rel = "stylesheet" type = "text/css" href = "schaduwkaart.css" />
+        <script src="schaduwkaart.js"></script>
+    </head>
+    <body onload="loadElements()">
+        <h2>Schaduwkaart berekenen:</h2>
+        <div id="map" class="map"></div>
+        <div class="buttons">
+            <button onclick="activateDrawPlot()">teken plot</button>
+            <button onclick="activateDrawObstacles()">teken obstakels</button>
+            <button onclick="calculateShadow()">bereken schaduw</button>
+        </div>
+    </body>
+</html>
