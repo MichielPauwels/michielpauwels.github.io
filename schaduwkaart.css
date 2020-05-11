@@ -6,6 +6,15 @@ body {
 }
 
 .map {
-    height: 400px;
+    height: 550px;
     width: 100%;
+}
+
+.toolbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 1em;
 }

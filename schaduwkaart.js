@@ -10,15 +10,52 @@ var geoJson = new ol.format.GeoJSON();
 const nb = 100;
 
 function shadeStyle(feature) {
-    const shade = feature.getProperties().shade / nb;
+    const shade = 255 - (feature.getProperties().shade / nb) * 255;
     return [new ol.style.Style({
         fill: new ol.style.Fill({
-            color: `rgba(0,0,0,${shade})`
+            color: `rgba(${shade}, ${shade}, ${shade}, 0.8)`
         })
     })];
 }
 
 function loadElements() {
+    loadMap();
+    loadLegend();
+}
+
+function loadLegend() {
+    const grid = 5;
+    const diff = 100 / grid;
+    const legendDiv = document.getElementById('legend');
+    const table = document.createElement('table');
+    table.style.borderCollapse = 'collapse';
+    table.style.textAlign = 'center';
+    legendDiv.appendChild(table);
+    const tbdy = document.createElement('tbody');
+    table.appendChild(tbdy);
+    const imgRow = document.createElement('tr');
+    imgRow.style.height = '30px';
+    const axisRow = document.createElement('tr');
+    new Array(grid + 1).fill(0).forEach((el, idx) => {
+        const td = document.createElement('td');
+        td.appendChild(document.createTextNode(idx * diff));
+        td.style.width = '30px';
+        axisRow.appendChild(td);
+        const tdColor = document.createElement('td');
+        const val = idx * diff / 100;
+        tdColor.style.background = 
+            `linear-gradient(90deg, rgba(0,0,0,${val - diff / 200}) 0%, rgba(0,0,0,${val}) 48%, rgba(0,0,0,1) 49%, rgba(0,0,0,1) 51%, rgba(0,0,0,${val}) 52%, rgba(0,0,0,${val + diff / 200}) 100%)`
+        if (idx === grid) {
+            tdColor.style.background = 
+            `linear-gradient(90deg, rgba(0,0,0,${val - diff / 200}) 0%, rgba(0,0,0,${val}) 48%, rgba(0,0,0,0) 49%, rgba(0,0,0,0) 100%)`
+        }
+        imgRow.appendChild(tdColor);
+    });
+    tbdy.appendChild(imgRow);
+    tbdy.appendChild(axisRow);
+}
+
+function loadMap() {
     plotLayer = new ol.layer.Vector({source: new ol.source.Vector()});
     obstacleLayer = new ol.layer.Vector({source: new ol.source.Vector()});
     shadowLayer = new ol.layer.Vector({source: new ol.source.Vector()});

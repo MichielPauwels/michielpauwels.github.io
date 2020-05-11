@@ -12,10 +12,13 @@
     <body onload="loadElements()">
         <h2>Schaduwkaart berekenen:</h2>
         <div id="map" class="map"></div>
-        <div class="buttons">
-            <button onclick="activateDrawPlot()">teken plot</button>
-            <button onclick="activateDrawObstacles()">teken obstakels</button>
-            <button onclick="calculateShadow()">bereken schaduw</button>
+        <div class="toolbar">
+            <div id="legend"></div>
+            <div class="buttons">
+                <button onclick="activateDrawPlot()">teken plot</button>
+                <button onclick="activateDrawObstacles()">teken obstakels</button>
+                <button onclick="calculateShadow()">bereken schaduw</button>
+            </div>
         </div>
     </body>
 </html>
