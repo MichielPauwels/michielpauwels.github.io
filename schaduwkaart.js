@@ -71,6 +71,8 @@ function loadMap() {
     obstacleLayer.getSource().on('addfeature', (e) => e.feature.setProperties({height: prompt("hoogte obstakel (m)")}));
     drawPlot.setActive(false);
     drawObstacles.setActive(false);
+    const select = new ol.interaction.Select({wrapX: false});
+    const modify = new ol.interaction.Modify({features: select.getFeatures()});
     map = new ol.Map({
         target: 'map',
         layers: [
@@ -89,6 +91,8 @@ function loadMap() {
     });
     map.addInteraction(drawPlot);
     map.addInteraction(drawObstacles);
+    map.addInteraction(select);
+    map.addInteraction(modify);
 }
 
 function activateDrawPlot() {
